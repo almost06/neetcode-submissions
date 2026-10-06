@@ -1,0 +1,28 @@
+class Solution {
+    public int maxArea(int[] heights) {
+        int pointer1 = 0; 
+        int pointer2 = heights.length -1; 
+        int max = -1; 
+        while(pointer1 < pointer2){
+            int area = (pointer2 - pointer1) * Math.min(heights[pointer1],heights[pointer2]);
+            if(area> max) max = area; 
+            if(heights[pointer1] < heights[pointer2]){
+                pointer1++;
+            }else if (heights[pointer1] > heights[pointer2]){
+                pointer2--;
+            }else{
+                if((pointer2 - (pointer1 + 1)) * Math.min(heights[pointer1+1],heights[pointer2]) > 
+                ((pointer2-1) - pointer1) * Math.min(heights[pointer1],heights[pointer2-1])
+                ){
+                    pointer1++;
+                }else{
+                    pointer2--;
+                }
+            }
+
+        }
+        return max; 
+    }
+
+
+}
